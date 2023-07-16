@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="../style.css">
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+	<script async defer
+	src="https://maps.googleapis.com/maps/api/js?libraries=drawing,geometry&key=AIzaSyDXOny1_S71ymyFXBIkOT9qykuaLdZyUtA&callback=initMap">
+	</script>
+
+	<script type="text/javascript">
+		var map;
+		var drawingManager;
+		var element;
+		var infoWindow;
+		var marker;
+		var markers = [];
+		var isBeingDragged = false;
+
+		function initMap() {
+			infoWindow = new google.maps.InfoWindow();
+		
+			var mapOptions = {
+				center: new google.maps.LatLng(44.5452, -78.5389),
+				zoom: 9
+			};
+			map = new google.maps.Map(document.getElementById('map'),
+			mapOptions);
+		  
+			drawRec();
+		}
+		
+		function removeMarkers() {
+			for (var i = 0; i < markers.length; i++) {
+				markers[i].setMap(null);
+			}
+			markers = [];
+		}
+		
+		function isWithinRect(marker, rectangle) {
+			var insideRectangle = false;
+			if (rectangle && rectangle.getBounds && marker && marker.getPosition()) 
+				insideRectangle = rectangle.getBounds().contains(marker.getPosition());
+			
+			return insideRectangle;
+		}
+		
+		function drawRec() {
+			drawingManager = new google.maps.drawing.DrawingManager();
+
+			drawingManager.setOptions({
+				drawingMode : google.maps.drawing.OverlayType.RECTANGLE,
+				drawingControl : true,
+				drawingControlOptions : {
+					position : google.maps.ControlPosition.TOP_CENTER,
+					drawingModes : [ google.maps.drawing.OverlayType.RECTANGLE ]
+				},
+				rectangleOptions : {
+					strokeColor : '#6c6c6c',
+					strokeWeight : 3.5,
+					fillColor : '#926239',
+					fillOpacity : 0.6,
+					editable: true,
+					draggable: true
+				}	
+			});
+			
+			google.maps.event.addListener(drawingManager, "drawingmode_changed", function() {
+				if (drawingManager.getDrawingMode() == "rectangle"){
+					element.setMap(null);
+					removeMarkers();
+				}
+			});
+			
+			google.maps.event.addListener(drawingManager, 'overlaycomplete', function(event) {
+				element = event.overlay;
+				
+				drawingManager.setDrawingMode(null);
+				
+				google.maps.event.addListener(element, 'click', function(e) {
+					element.setMap(null);
+					drawingManager.setDrawingMode(null);
+					removeMarkers();
+				});
+				
+				google.maps.event.addListener(element, 'bounds_changed', function(e) {
+					if(isBeingDragged === false){
+						drawingManager.setDrawingMode(null);
+						console.log("bounds_changed");
+						
+						var lat = getRandomInRange(44,45,6);
+						var lng = getRandomInRange(-79,-78,6);
+						var latLng = new google.maps.LatLng(lat, lng);
+						marker = new google.maps.Marker({
+							position: latLng,
+							title: 'Test'
+						});
+						var val = isWithinRect(marker, element);
+						console.log(lat + "," + lng + " -> " + val);
+						
+						if(val === true) {						
+							marker.setMap(map);
+							markers.push(marker);
+						}
+					}
+				});
+				
+				google.maps.event.addListener(element, 'dragend', function(e) {
+					isBeingDragged = false;
+					var lat = getRandomInRange(44,45,6);
+					var lng = getRandomInRange(-79,-78,6);
+					var latLng = new google.maps.LatLng(lat, lng);
+					marker = new google.maps.Marker({
+						position: latLng,
+						title: 'Test'
+					});
+					var val = isWithinRect(marker, element);
+					console.log(lat + "," + lng + " -> " + val);
+					
+					if(val === true) {						
+						marker.setMap(map);
+						markers.push(marker);
+					}
+				});
+				
+				google.maps.event.addListener(element, 'dragstart', function(e) {
+					isBeingDragged = true;
+					removeMarkers();
+				});
+			});
+
+			drawingManager.setMap(map);
+		}
+		
+		function getRandomInRange(from, to, fixed) {
+			return (Math.random() * (to - from) + from).toFixed(fixed) * 1;
+		}
+		
+		function showCoords(rectangle) {
+			var bounds = rectangle.getBounds();
+			var ne = bounds.getNorthEast();
+			var sw = bounds.getSouthWest();
+			var nw = new google.maps.LatLng(ne.lat(),sw.lng());
+			var se = new google.maps.LatLng(sw.lat(),ne.lng());
+			
+			var contentString = '<b>Rectangle coordinates.</b><br>' +
+				'New north-east corner: ' + ne.lat() + ', ' + ne.lng() + '<br>' +
+				'New south-west corner: ' + sw.lat() + ', ' + sw.lng() + '<br>' +
+				'New north-west corner: ' + nw.lat() + ', ' + nw.lng() + '<br>' +
+				'New south-east corner: ' + se.lat() + ', ' + se.lng();
+
+			infoWindow.setContent(contentString);
+			infoWindow.setPosition(ne);
+			infoWindow.open(map);
+		}
+	</script>
+</head>
+<body>
+	<div id="map"></div>
+</body>
+</html>

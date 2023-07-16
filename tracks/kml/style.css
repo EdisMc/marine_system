@@ -1,0 +1,27 @@
+html, body {
+width: 100%;
+padding: 0;
+margin: 0;
+}
+#map {
+float: left;
+width: 84.8%;
+overflow: hidden;
+border: thin solid #333;
+}
+#rightPane {
+float: right;
+width: 15%;
+height: 100%;
+overflow: auto;
+border: thin solid #333;
+border-left: none;
+}
+.row {
+height: 100%;
+width: 100%;
+left: 0;
+top: 0;
+overflow: hidden;
+position: fixed;
+}

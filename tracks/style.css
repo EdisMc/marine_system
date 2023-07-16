@@ -1,0 +1,63 @@
+html, body, #map {
+  height: 100%;
+  margin: 0px;
+  padding: 0px
+}
+#rotateElemContainer {
+  position: absolute; 
+  top: 10px; 
+  left: 10px; 
+  z-index: 99;
+  display: none;
+  background-color: #f6f6f6;
+  border: 1px solid #CBCBCB;
+}
+#slidecontainer {
+	display: none;
+}
+.trackInfo {
+	background-color: #fff;
+	border: 2px solid #fff;
+	border-radius: 3px;
+	box-shadow: 0 2px 6px rgba(0,0,0,.3);
+	cursor: pointer;
+	margin-left: 10px;
+    margin-top: 5px;
+	font-family: Roboto,Arial,sans-serif;
+	font-size: 16px;
+	line-height: 38px;
+	padding-left: 5px;
+	padding-right: 5px;
+	display: none;
+}
+
+h1.heading{padding:0px;margin: 0px 0px 10px 0px;text-align:center;font: 18px Georgia, "Times New Roman", Times, serif;}
+
+/* Track Edit form */
+.track-edit label, .goto-location label{display:block;margin-bottom: 5px;}
+.track-edit label span, .goto-location label span{width: 80px;float: left;}
+.track-edit label input, .track-edit label select, .goto-location label input, .goto-location label select{height: 24px;}
+.track-edit label textarea{height: 60px;resize: none;}
+.track-edit label input, .track-edit label select, .track-edit label textarea, .goto-location label input, .goto-location label select {width: 60%;margin:0px;padding-left: 5px;border: 1px solid #DDD;border-radius: 3px;}
+
+/* Track Info Window */
+h1.track-heading{color: #585858;margin: 0px;padding: 0px;font: 18px "Trebuchet MS", Arial;border-bottom: 1px dotted #D8D8D8;}
+div.track-info-win {max-width: 250px; max-height: 200px;}
+button.save-track, button.remove-track, button.move-marker, button.delete-marker{margin-right: 10px;cursor: pointer;
+}
+
+.distArea {
+	background-color: #fff;
+	border: 2px solid #fff;
+	border-radius: 3px;
+	box-shadow: 0 2px 6px rgba(0,0,0,.3);
+	cursor: pointer;
+    margin-top: 10px;
+    text-align: center;
+	font-family: Roboto,Arial,sans-serif;
+	font-size: 16px;
+	line-height: 38px;
+	padding-left: 5px;
+	padding-right: 5px;
+	display: none;
+}

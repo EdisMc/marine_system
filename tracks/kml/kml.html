@@ -1,0 +1,54 @@
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <title>KML Sample</title>
+    <style>
+      html, body {
+        height: 100%;
+		width: 100%;
+        padding: 0;
+        margin: 0;
+        }
+      #map {
+       float: left;
+	   width: 84.8%;
+	   height: 100%;
+       overflow: hidden;
+       border: thin solid #333;
+       }
+      #rightPane {
+       float: right;
+       width: 15%;
+	   height: 100%;
+	   overflow: auto;
+       border: thin solid #333;
+       border-left: none;
+       }
+	   .row {
+		height: 100%;
+		width: 100%;
+		left: 0;
+		top: 0;
+		overflow: hidden;
+		position: fixed;
+	   }
+    </style>
+  </head>
+  <body>
+    
+	<div class="row">
+		<div id="loaddiv" style="display: none;">Loading.....&nbsp;&nbsp;&nbsp; please wait!<br></div>
+		<div id="map"></div>
+		<div id="rightPane"></div>
+	</div>
+
+	<script type="text/javascript" src="js/geoxml3.js"></script>
+	<script type="text/javascript" src="js/script.js"></script>
+
+	<script src="https://maps.googleapis.com/maps/api/js?libraries=drawing,geometry&key=AIzaSyDXOny1_S71ymyFXBIkOT9qykuaLdZyUtA&callback=initMap"></script>
+	<script type="text/javascript" src="js/ProjectedOverlay.js"></script>
+	
+	
+  </body>
+</html>
