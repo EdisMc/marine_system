@@ -1,0 +1,9 @@
+On Windows
+
+1. Download and install XAMPP. XAMPP is a very easy to install Apache Distribution for Linux, Solaris, Windows, and Mac OS X. The package includes the Apache web server, MySQL, PHP, Perl, a FTP server and phpMyAdmin.
+2. After the installation completes copy marine_system.rar to htdocs folder of XAMPP installation folder (the default path is C:\xampp\htdocs).
+3. Right click on archive and select Extract to marine_system\.
+4. Download and install MySQL Workbench. MySQL Workbench is a unified visual tool for database architects, developers, and DBAs.
+5. After the installation completes import the dump file to your MySQL Server. Click on Server/Data Import choose 'Import from self-contained file' and select Dump20200623.sql and click on 'Start Import'.
+6. The next step is configuring the data for PHP. Open db_info.php and check the credentials. Enter your username, password, port, host and etc. Be sure you enter correct data.
+7. Now, you can test the application by opening http://127.0.0.1/marine_system/tracks/ on your browser.
