@@ -5,7 +5,7 @@
 ![image](https://github.com/EdisMc/marine_system/assets/92871901/fe2fd5af-1595-430b-bf33-516f035b8e97)
 
 ## General Information
-"Marine System" is a php web application, created for determining and visualizing routes by location of a marine robot named "Sea Turtle" - the first Bulgarian marine robot, created by scientists in the Institute of Oceanology "Fridtjof Nansen". The main purpose of the software is data processing and analysis from a marine researcher and visualization of seabed images made by the "Sea Turtle".
+"Marine System" is a php web application, created for determining and visualizing routes by location of a marine robot named "Sea Turtle" - the first Bulgarian marine robot, created by scientists in the Institute of Oceanology "Fridtjof Nansen". The main purpose of the software is data processing and analysis from a marine research and visualization of seabed images (made by the "Sea Turtle") on Google Maps.
 
 ## Technologies
 
